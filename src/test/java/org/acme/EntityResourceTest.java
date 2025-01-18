@@ -1,10 +1,10 @@
-import io.quarkus.test.junit.QuarkusTest;
-import io.restassured.RestAssured;
-import org.junit.jupiter.api.Test;
-import static org.hamcrest.CoreMatchers.is;
-
 package org.acme;
 
+import static org.hamcrest.CoreMatchers.is;
+import org.junit.jupiter.api.Test;
+
+import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.RestAssured;
 
 
 @QuarkusTest

@@ -24,6 +24,6 @@ import jakarta.persistence.Entity;
  * }
  */
 @Entity
-public class Movie extends PanacheEntity {
+public class Order extends PanacheEntity {
     public String field;
 }
