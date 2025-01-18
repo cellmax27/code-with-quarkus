@@ -15,6 +15,8 @@
         <quarkus.platform.version>3.17.7</quarkus.platform.version>
         <skipITs>true</skipITs>
         <surefire-plugin.version>3.5.0</surefire-plugin.version>
+
+        <org.mapstruct.version>1.6.3</org.mapstruct.version>
     </properties>
 
     <dependencyManagement>
@@ -68,6 +70,24 @@
             <artifactId>rest-assured</artifactId>
             <scope>test</scope>
         </dependency>
+
+		<!-- MapStruct-->
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
+			<version>${org.mapstruct.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct-processor</artifactId>
+			<version>${org.mapstruct.version}</version>
+			<!-- IntelliJ does not pick up the processor if it is not in the
+			dependencies.
+             There is already an open issue for IntelliJ see
+			https://youtrack.jetbrains.com/issue/IDEA-150621
+            -->
+			<scope>provided</scope>
+		</dependency>
     </dependencies>
 
     <build>
