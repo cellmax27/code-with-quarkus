@@ -1,7 +1,10 @@
-package org.acme;
+package org.acme.resources;
 
 import java.net.URI;
 import java.util.List;
+
+import org.acme.model.Movie;
+
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
