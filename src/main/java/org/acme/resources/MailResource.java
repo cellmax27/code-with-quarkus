@@ -1,4 +1,4 @@
-package org.acme;
+package org.acme.resources;
 
 import io.quarkus.mailer.Mail;
 import io.quarkus.mailer.Mailer;

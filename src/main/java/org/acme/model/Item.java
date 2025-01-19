@@ -1,4 +1,4 @@
-
+package org.acme.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,7 +13,7 @@ import jakarta.persistence.Table;
 
 @Getter
 @Setter
-//@NoArgsConstructor // Génère un constructeur sans arguments @AllArgsConstructor
+@NoArgsConstructor // Génère un constructeur sans arguments @AllArgsConstructor
 @AllArgsConstructor // Génère un constructeur avec tous les arguments public class Item
 @Entity
 //@Table(name="STUDENT")
@@ -25,7 +25,9 @@ public class Item {
 	private String description;
 
 	// Getters et Setters
-
+	public Item() {
+		// TODO Auto-generated constructor stub
+	}
 	public Item(long l, String name, String description) {
 		// TODO Auto-generated constructor stub
 		this.id = l;
