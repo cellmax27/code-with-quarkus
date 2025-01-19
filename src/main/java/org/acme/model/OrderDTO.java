@@ -1,8 +1,5 @@
 package org.acme.model;
 
-import java.time.LocalDate;
-import java.util.List;
-
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.Entity;
 
@@ -27,17 +24,6 @@ import jakarta.persistence.Entity;
  * }
  */
 @Entity
-public class Movie extends PanacheEntity {
-    public String id;
-    public String name;
-    public LocalDate birth;
-//    public Status status;
-
-    public static Movie findByName(String name){
-        return find("name", name).firstResult();
-    }
-    public static Movie findById(String id){
-        return find("id", id).firstResult();
-    }
-
+public class OrderDTO extends PanacheEntity {
+    public String field;
 }
