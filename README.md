@@ -77,3 +77,66 @@ Create your first JPA entity
 Easily start your REST Web Services
 
 [Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
+
+
+
+
+
+
+
+
+```shell script
+quarkus --help
+Usage: quarkus [-ehv] [--refresh] [--verbose] [--config=CONFIG]
+               [-D=<String=String>]... [COMMAND]
+Options:
+      --refresh         Refresh the local Quarkus extension registry cache
+      --config=CONFIG   Configuration file
+  -h, --help            Display this help message.
+  -v, --version         Print CLI version information and exit.
+  -e, --errors          Display error messages.
+      --verbose         Verbose mode.
+  -D=<String=String>    Java properties
+
+Commands:
+  create                  Create a new project.
+    app                   Create a Quarkus application project.
+    cli                   Create a Quarkus command-line project.
+    extension             Create a Quarkus extension project
+  build                   Build the current project.
+  dev                     Run the current project in dev (live coding) mode.
+  test                    Run the current project in continuous testing mode.
+  extension, ext          Configure extensions of an existing project.
+    list, ls              List platforms and extensions.
+    categories, cat       List extension categories.
+    add                   Add extension(s) to this project.
+    remove, rm            Remove extension(s) from this project.
+  image                   Build or push project container image.
+    build                 Build a container image.
+      docker              Build a container image using Docker.
+      buildpack           Build a container image using Buildpack.
+      jib                 Build a container image using Jib.
+      openshift           Build a container image using OpenShift.
+    push                  Push a container image.
+  deploy                  Deploy application.
+    kubernetes            Perform the deploy action on Kubernetes.
+    openshift             Perform the deploy action on OpenShift.
+    knative               Perform the deploy action on Knative.
+    kind                  Perform the deploy action on Kind.
+    minikube              Perform the deploy action on minikube.
+  registry                Configure Quarkus registry client
+    list                  List enabled Quarkus registries
+    add                   Add a Quarkus extension registry
+    remove                Remove a Quarkus extension registry
+  info                    Display project information and verify versions
+                            health (platform and extensions).
+  update, up, upgrade     Suggest recommended project updates with the
+                            possibility to apply them.
+  version                 Display CLI version information.
+  plugin, plug            Configure plugins of the Quarkus CLI.
+    list, ls              List CLI plugins.
+    add                   Add plugin(s) to the Quarkus CLI.
+    remove                Remove plugin(s) to the Quarkus CLI.
+    sync                  Sync (discover / purge) CLI Plugins.
+  completion              bash/zsh completion:  source <(quarkus completion)
+```
