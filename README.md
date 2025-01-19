@@ -81,9 +81,9 @@ Easily start your REST Web Services
 
 
 
+### Cli tooling
 
-
-
+https://quarkus.io/guides/cli-tooling
 
 ```shell script
 quarkus --help
