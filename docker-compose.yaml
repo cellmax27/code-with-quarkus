@@ -1,0 +1,54 @@
+version: '3'
+  # based on Docker file sample
+services:
+  backend:
+    image: openjdk:17
+    container_name: java-app
+    build:
+      context: .
+      dockerfile: Dockerfile-backend
+    ports:
+      - "9966:9966"
+    volumes:
+        - ./backend:/app
+    working_dir: /app
+    command: ["./mvnw", "spring-boot:run"]
+    networks:
+      - my-network
+
+  frontend:
+    image: node:18
+    container_name: angular-app
+    build:
+      context: .
+      dockerfile: Dockerfile-frontend
+    ports:
+      - "4200:4200"
+    volumes:
+        - ./frontend:/app
+    working_dir: /app
+    command: ["npm", "start"]
+    networks:
+      - my-network
+
+  database:
+    image: mysql:5.7
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: my-secret-password
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+        - db-data:/var/lib/mysql
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge
+
+volumes:
+    db-data:

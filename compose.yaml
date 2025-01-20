@@ -1,0 +1,107 @@
+version: '3.8'
+
+services:
+  web:
+    image: node:18
+    container_name: angular-app
+    working_dir: /app
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.angular 
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "4200:4200"
+    command: bash -c "npm install && npm start"
+
+  backend:
+    image: openjdk:17
+    container_name: java-app
+    working_dir: /app
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.java 
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8080:8080"
+    command: bash -c "mvn clean install && java -jar target/your-backend-app.jar"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13
+    container_name: mysql-db
+    environment:
+      POSTGRES_DB: mydatabase
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  # Uncomment this section to use a configuration server
+  # config-server:
+  #   image: springcloud/configserver
+  #   ports:
+  #     - "8888:8888"
+  #   environment:
+  #     - CONFIG_SERVER_GIT_URI=https://your-git-repo.git
+
+  # Uncomment these sections to use ELK for logging
+  # elasticsearch:
+  #   image: docker.elastic.co/elasticsearch/elasticsearch:7.9.3
+  #   environment:
+  #     - discovery.type=single-node
+  #   ports:
+  #     - "9200:9200"
+  #
+  # kibana:
+  #   image: docker.elastic.co/kibana/kibana:7.9.3
+  #   environment:
+  #     - ELASTICSEARCH_URL=http://elasticsearch:9200
+  #   ports:
+  #     - "5601:5601"
+  #
+  # logstash:
+  #   image: docker.elastic.co/logstash/logstash:7.9.3
+  #   ports:
+  #     - "5000:5000"
+  #   volumes:
+  #     - ./logstash-pipeline:/usr/share/logstash/pipeline
+  #   depends_on:
+  #     - elasticsearch
+
+  # Uncomment this section to use nginx as a reverse proxy
+  # nginx:
+  #   image: nginx:alpine
+  #   ports:
+  #     - "80:80"
+  #   volumes:
+  #     - ./nginx.conf:/etc/nginx/nginx.conf
+  #   depends_on:
+  #     - web
+  #     - backend
+
+volumes:
+  db-data:
+    driver: local
+
+# Define networks (uncomment if needed)
+# networks:
+#   frontend:
+#   backend:
+
+# Assign networks to services (uncomment if needed)
+# services:
+#   web:
+#     networks:
+#       - frontend
+#   backend:
+#     networks:
+#       - backend
+#   db:
+#     networks:
+#       - backend
+

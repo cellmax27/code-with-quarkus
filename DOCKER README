@@ -1,0 +1,13 @@
+docker build -t my-angular-app .
+docker run -p 4200:4200 my-angular-app
+
+docker-compose -f 1.yaml up
+
+Pour construire et exécuter le conteneur pour l'application Angular :
+cd /path/to/your/project
+docker build -f Dockerfile.angular -t angular-app .
+docker run -p 4200:4200 angular-app
+
+De même, pour l'application Java :
+docker build -f Dockerfile.java -t java-app .
+docker run -p 8080:8080 java-app
