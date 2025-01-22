@@ -45,7 +45,7 @@
 		<surefire-plugin.version>3.5.0</surefire-plugin.version>
 
 		<org.mapstruct.version>1.6.3</org.mapstruct.version>
-		
+
 		<!--<commons-lang3-version>3.17.0</commons-lang3-version>-->
 	</properties>
 
@@ -89,6 +89,10 @@
 		<dependency>
 			<groupId>io.quarkus</groupId>
 			<artifactId>quarkus-hibernate-orm</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.quarkus</groupId>
+			<artifactId>quarkus-jdbc-h2</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>io.quarkus</groupId>
