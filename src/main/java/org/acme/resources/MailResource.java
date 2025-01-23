@@ -29,7 +29,7 @@ public class MailResource {
     @Path("/reactive")
     public Uni<Void> sendEmailUsingReactiveMailer() {
         return reactiveMailer.send(                         // <4>
-                Mail.withText("clement.escoffier@redhat.com",
+                Mail.withText("arno.brunoni@redhat.com",
                         "Ahoy from Quarkus",
                         "A simple email sent from a Quarkus application using the reactive API."
                 )
