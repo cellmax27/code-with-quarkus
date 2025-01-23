@@ -17,5 +17,8 @@ public class EntityResourceTest {
           .then()
              .statusCode(200)
              .body(is("Hello user from Quarkus REST!"));
+//             .body(containsString("Hello"));
+//             .body(is("Hello user from Quarkus REST!"));
+        
     }
 }
