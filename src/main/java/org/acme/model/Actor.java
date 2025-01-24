@@ -27,4 +27,18 @@ public class Actor extends PanacheEntity {
 	public String profile_path;
 	public String character;
 	public Long id;
+	
+	// put your custom logic here as instance methods
+
+	public Actor findByName(String name) {
+		return find("name", name).firstResult();
+	}
+
+//   public List<Actor> findAlive(){
+//       return list("status", Status.Alive);
+//   }
+
+	public void deleteStefs() {
+		delete("name", "Stef");
+	}
 }

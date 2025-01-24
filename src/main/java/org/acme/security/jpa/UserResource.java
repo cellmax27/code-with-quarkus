@@ -1,5 +1,7 @@
 package org.acme.security.jpa;
 
+import org.acme.model.Actor;
+
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
@@ -17,5 +19,11 @@ public class UserResource {
 	@Produces(MediaType.TEXT_PLAIN)
 	public String me(@Context SecurityContext securityContext) {
 		return securityContext.getUserPrincipal().getName();
+	}
+	
+	@GET
+	@Path("/count")
+	public Long count() {
+		return Actor.count();
 	}
 }

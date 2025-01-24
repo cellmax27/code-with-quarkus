@@ -1,8 +1,8 @@
 -- This file allow to write SQL commands that will be emitted in test and dev.
 -- The commands are commented as their support depends of the database
--- insert into myentity (id, field) values(1, 'field-1');
--- insert into myentity (id, field) values(2, 'field-2');
--- insert into myentity (id, field) values(3, 'field-3');
+insert into myentity (id, field) values(1, 'field-1');
+insert into myentity (id, field) values(2, 'field-2');
+insert into myentity (id, field) values(3, 'field-3');
 -- alter sequence myentity_seq restart with 4;
 
 
@@ -12,6 +12,7 @@ CREATE TABLE `actor` (
                          `actor_id` smallint unsigned NOT NULL AUTO_INCREMENT,
                          `first_name` varchar(45) NOT NULL,
                          `last_name` varchar(45) NOT NULL,
+                         `character` varchar(45) NOT NULL,
                          `last_update` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
                          PRIMARY KEY (`actor_id`),
                          KEY `idx_actor_last_name` (`last_name`)
@@ -309,3 +310,64 @@ INSERT INTO items (name, description) VALUES ('Item 3', 'Description de l\'Item 
 
 
 CREATE SEQUENCE CUSTOMER_SEQ START WITH 1 INCREMENT BY 1;
+
+
+
+INSERT INTO Greeting(id, name)
+VALUES (nextval('Greeting_SEQ'), 'Alice');
+INSERT INTO Greeting(id, name)
+VALUES (nextval('Greeting_SEQ'), 'Bob');
+
+
+CREATE TABLE sakila2.city_1 (
+	ID int auto_increment NOT NULL,
+	Name char(35) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT '' NOT NULL,
+	CountryCode char(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT '' NOT NULL,
+	District char(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT '' NOT NULL,
+	Population int DEFAULT 0 NOT NULL,
+	CONSTRAINT `PRIMARY` PRIMARY KEY (ID)
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=utf8mb4
+COLLATE=utf8mb4_0900_ai_ci
+COMMENT='';
+CREATE INDEX CountryCode USING BTREE ON sakila2.city_1 (CountryCode);
+
+
+CREATE TABLE sakila2.country_1 (
+	Code char(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT '' NOT NULL,
+	Name char(52) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT '' NOT NULL,
+	Continent enum('Asia','Europe','North America','Africa','Oceania','Antarctica','South America') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 'Asia' NOT NULL,
+	Region char(26) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT '' NOT NULL,
+	SurfaceArea decimal(10,2) DEFAULT 0.00 NOT NULL,
+	IndepYear smallint NULL,
+	Population int DEFAULT 0 NOT NULL,
+	LifeExpectancy decimal(3,1) NULL,
+	GNP decimal(10,2) NULL,
+	GNPOld decimal(10,2) NULL,
+	LocalName char(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT '' NOT NULL,
+	GovernmentForm char(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT '' NOT NULL,
+	HeadOfState char(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,
+	Capital int NULL,
+	Code2 char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT '' NOT NULL,
+	CONSTRAINT `PRIMARY` PRIMARY KEY (Code)
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=utf8mb4
+COLLATE=utf8mb4_0900_ai_ci
+COMMENT='';
+
+
+CREATE TABLE sakila2.countrylanguage (
+	CountryCode char(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT '' NOT NULL,
+	`Language` char(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT '' NOT NULL,
+	IsOfficial enum('T','F') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 'F' NOT NULL,
+	Percentage decimal(4,1) DEFAULT 0.0 NOT NULL,
+	CONSTRAINT `PRIMARY` PRIMARY KEY (CountryCode,`Language`)
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=utf8mb4
+COLLATE=utf8mb4_0900_ai_ci
+COMMENT='';
+CREATE INDEX CountryCode USING BTREE ON sakila2.countrylanguage (CountryCode);
+

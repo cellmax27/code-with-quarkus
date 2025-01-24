@@ -30,4 +30,5 @@ public class Order extends PanacheEntity {
 	public Long petId;
 	public Integer quantity;
 	public Date shipDate;
+	public Date date;
 }
