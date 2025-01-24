@@ -1,6 +1,7 @@
 package org.acme;
 
 import static org.hamcrest.CoreMatchers.is;
+
 import org.junit.jupiter.api.Test;
 
 import io.quarkus.test.junit.QuarkusTest;

@@ -2,10 +2,9 @@ package org.acme.scheduler;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import jakarta.enterprise.context.ApplicationScoped;
-
 import io.quarkus.scheduler.Scheduled;
 import io.quarkus.scheduler.ScheduledExecution;
+import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class CounterBean {

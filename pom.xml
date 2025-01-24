@@ -67,18 +67,7 @@
 			<groupId>io.quarkus</groupId>
 			<artifactId>quarkus-rest-jackson</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>io.quarkus</groupId>
-			<artifactId>quarkus-hibernate-orm-panache</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>io.quarkus</groupId>
-			<artifactId>quarkus-jdbc-mysql</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>io.quarkus</groupId>
-			<artifactId>quarkus-jdbc-postgresql</artifactId>
-		</dependency>
+
 		<dependency>
 			<groupId>io.quarkus</groupId>
 			<artifactId>quarkus-arc</artifactId>
@@ -89,16 +78,28 @@
 		</dependency>
 		<dependency>
 			<groupId>io.quarkus</groupId>
+			<artifactId>quarkus-hibernate-orm-panache</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.quarkus</groupId>
+			<artifactId>quarkus-jdbc-mysql</artifactId>
+		</dependency>
+<!--		<dependency>
+			<groupId>io.quarkus</groupId>
+			<artifactId>quarkus-jdbc-postgresql</artifactId>
+		</dependency>-->
+		<dependency>
+			<groupId>io.quarkus</groupId>
 			<artifactId>quarkus-jdbc-h2</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>io.quarkus</groupId>
 			<artifactId>quarkus-security-jpa</artifactId>
 		</dependency>
-		<dependency>
+<!--		<dependency>
 		    <groupId>io.quarkus</groupId>
 		    <artifactId>quarkus-security-jpa-reactive</artifactId>
-		</dependency>
+		</dependency>-->
 		<dependency>
 			<groupId>io.quarkus</groupId>
 			<artifactId>quarkus-junit5</artifactId>
@@ -144,7 +145,6 @@
 			<artifactId>commons-lang3</artifactId>
 		</dependency>
 
-		<!-- MapStruct-->
 		<dependency>
 			<groupId>org.assertj</groupId>
 			<artifactId>assertj-core</artifactId>
@@ -157,6 +157,7 @@
             -->
 		</dependency>
 
+		<!-- MapStruct-->
 		<dependency>
 			<groupId>org.mapstruct</groupId>
 			<artifactId>mapstruct</artifactId>
@@ -170,8 +171,6 @@
 			<scope>provided</scope>
 		</dependency>
 
-
-		<!-- Lombok -->
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
@@ -182,8 +181,7 @@
 			<version>1.9.0</version>
 		</dependency>
 		
-		<!-- Flyway -->
-		<!-- Flyway specific dependencies -->
+		<!-- Lombok -->
 		<dependency>
 		    <groupId>org.projectlombok</groupId>
 		    <artifactId>lombok</artifactId>
@@ -196,8 +194,12 @@
 		    <groupId>io.quarkus</groupId>
 		    <artifactId>quarkus-jdbc-postgresql</artifactId>
 		</dependency>
+		-->
 		
-		 Flyway SQL Server specific dependencies 
+				<!-- Flyway -->
+		<!-- Flyway specific dependencies -->
+		 <!--Flyway SQL Server specific dependencies -->
+		 <!--
 		<dependency>
 		    <groupId>org.flywaydb</groupId>
 		    <artifactId>flyway-sqlserver</artifactId>
@@ -234,19 +236,7 @@
 		    <groupId>io.quarkus</groupId>
 		    <artifactId>quarkus-liquibase</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>io.quarkus</groupId>
-			<artifactId>quarkus-jdbc-postgresql</artifactId>
-		</dependency>
-		
-		<dependency>
-    <groupId>io.quarkus</groupId>
-    <artifactId>quarkus-security-jpa</artifactId>
-</dependency>
-<dependency>
-    <groupId>io.quarkus</groupId>
-    <artifactId>quarkus-security-jpa-reactive</artifactId>
-</dependency>
+
 	</dependencies>
 
 	<build>

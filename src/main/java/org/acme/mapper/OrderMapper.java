@@ -6,10 +6,10 @@
 package org.acme.mapper;
 
 
-import org.mapstruct.InheritInverseConfiguration;
-import org.mapstruct.Mapper;
 import org.acme.model.Order;
 import org.acme.model.OrderDTO;
+import org.mapstruct.InheritInverseConfiguration;
+import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
 /**
