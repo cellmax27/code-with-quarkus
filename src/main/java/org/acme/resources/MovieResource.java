@@ -22,59 +22,59 @@ import jakarta.ws.rs.core.Response;
 @Consumes(MediaType.APPLICATION_JSON)
 public class MovieResource {
 
-    @GET
-    public List<Movie> list() {
-        return Movie.listAll();
-    }
+	@GET
+	public List<Movie> list() {
+		return Movie.listAll();
+	}
 
-    @GET
-    @Path("/{id}")
-    public Movie get(Long id) {
-        return Movie.findById(id);
-    }
+	@GET
+	@Path("/{id}")
+	public Movie get(Long id) {
+		return Movie.findById(id);
+	}
 
-    @POST
-    @Transactional
-    public Response create(Movie movie) {
-        movie.persist();
-        return Response.created(URI.create("/movies/" + movie.id)).build();
-    }
+	@POST
+	@Transactional
+	public Response create(Movie movie) {
+		movie.persist();
+		return Response.created(URI.create("/movies/" + movie.id)).build();
+	}
 
-    @PUT
-    @Path("/{id}")
-    @Transactional
-    public Movie update(Long id, Movie movie) {
-        Movie entity = Movie.findById(id);
-        if(entity == null) {
-            throw new NotFoundException();
-        }
+	@PUT
+	@Path("/{id}")
+	@Transactional
+	public Movie update(Long id, Movie movie) {
+		Movie entity = Movie.findById(id);
+		if (entity == null) {
+			throw new NotFoundException();
+		}
 
-        // map all fields from the movie parameter to the existing entity
-        entity.name = movie.name;
+		// map all fields from the movie parameter to the existing entity
+		entity.name = movie.name;
 
-        return entity;
-    }
+		return entity;
+	}
 
-    @DELETE
-    @Path("/{id}")
-    @Transactional
-    public void delete(Long id) {
-        Movie entity = Movie.findById(id);
-        if(entity == null) {
-            throw new NotFoundException();
-        }
-        entity.delete();
-    }
+	@DELETE
+	@Path("/{id}")
+	@Transactional
+	public void delete(Long id) {
+		Movie entity = Movie.findById(id);
+		if (entity == null) {
+			throw new NotFoundException();
+		}
+		entity.delete();
+	}
 
-    @GET
-    @Path("/search/{name}")
-    public Movie search(String name) {
-        return Movie.findByName(name);
-    }
+	@GET
+	@Path("/search/{name}")
+	public Movie search(String name) {
+		return Movie.findByName(name);
+	}
 
-    @GET
-    @Path("/count")
-    public Long count() {
-        return Movie.count();
-    }
+	@GET
+	@Path("/count")
+	public Long count() {
+		return Movie.count();
+	}
 }

@@ -9,10 +9,10 @@ import jakarta.ws.rs.core.MediaType;
 @Path("/api/admin")
 public class AdminResource {
 
-    @GET
-    @RolesAllowed("admin")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String adminResource() {
-        return "admin";
-    }
+	@GET
+	@RolesAllowed("admin")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String adminResource() {
+		return "admin";
+	}
 }

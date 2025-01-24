@@ -9,10 +9,10 @@ import jakarta.ws.rs.core.MediaType;
 @Path("/api/public")
 public class PublicResource {
 
-    @GET
-    @PermitAll
-    @Produces(MediaType.TEXT_PLAIN)
-    public String publicResource() {
-        return "public";
-    }
+	@GET
+	@PermitAll
+	@Produces(MediaType.TEXT_PLAIN)
+	public String publicResource() {
+		return "public";
+	}
 }

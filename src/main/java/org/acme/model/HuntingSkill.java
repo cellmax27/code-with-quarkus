@@ -10,17 +10,12 @@
  * Do not edit the class manually.
  */
 
-
 package org.acme.model;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import java.util.Objects;
-import com.google.gson.annotations.SerializedName;
-
 import java.io.IOException;
-import com.google.gson.TypeAdapter;
+
 import com.google.gson.JsonElement;
+import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
@@ -30,55 +25,54 @@ import com.google.gson.stream.JsonWriter;
  */
 @JsonAdapter(HuntingSkill.Adapter.class)
 public enum HuntingSkill {
-  
-  CLUELESS("clueless"),
-  
-  LAZY("lazy"),
-  
-  ADVENTUROUS("adventurous"),
-  
-  AGGRESSIVE("aggressive");
 
-  private String value;
+	CLUELESS("clueless"),
 
-  HuntingSkill(String value) {
-    this.value = value;
-  }
+	LAZY("lazy"),
 
-  public String getValue() {
-    return value;
-  }
+	ADVENTUROUS("adventurous"),
 
-  @Override
-  public String toString() {
-    return String.valueOf(value);
-  }
+	AGGRESSIVE("aggressive");
 
-  public static HuntingSkill fromValue(String value) {
-    for (HuntingSkill b : HuntingSkill.values()) {
-      if (b.value.equals(value)) {
-        return b;
-      }
-    }
-    throw new IllegalArgumentException("Unexpected value '" + value + "'");
-  }
+	private String value;
 
-  public static class Adapter extends TypeAdapter<HuntingSkill> {
-    @Override
-    public void write(final JsonWriter jsonWriter, final HuntingSkill enumeration) throws IOException {
-      jsonWriter.value(enumeration.getValue());
-    }
+	HuntingSkill(String value) {
+		this.value = value;
+	}
 
-    @Override
-    public HuntingSkill read(final JsonReader jsonReader) throws IOException {
-      String value = jsonReader.nextString();
-      return HuntingSkill.fromValue(value);
-    }
-  }
+	public String getValue() {
+		return value;
+	}
 
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-    String value = jsonElement.getAsString();
-    HuntingSkill.fromValue(value);
-  }
+	@Override
+	public String toString() {
+		return String.valueOf(value);
+	}
+
+	public static HuntingSkill fromValue(String value) {
+		for (HuntingSkill b : HuntingSkill.values()) {
+			if (b.value.equals(value)) {
+				return b;
+			}
+		}
+		throw new IllegalArgumentException("Unexpected value '" + value + "'");
+	}
+
+	public static class Adapter extends TypeAdapter<HuntingSkill> {
+		@Override
+		public void write(final JsonWriter jsonWriter, final HuntingSkill enumeration) throws IOException {
+			jsonWriter.value(enumeration.getValue());
+		}
+
+		@Override
+		public HuntingSkill read(final JsonReader jsonReader) throws IOException {
+			String value = jsonReader.nextString();
+			return HuntingSkill.fromValue(value);
+		}
+	}
+
+	public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+		String value = jsonElement.getAsString();
+		HuntingSkill.fromValue(value);
+	}
 }
-

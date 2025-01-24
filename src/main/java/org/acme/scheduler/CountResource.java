@@ -9,12 +9,12 @@ import jakarta.ws.rs.core.MediaType;
 @Path("/count")
 public class CountResource {
 
-    @Inject
-    CounterBean counter;
+	@Inject
+	CounterBean counter;
 
-    @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String hello() {
-        return "count: " + counter.get();
-    }
+	@GET
+	@Produces(MediaType.TEXT_PLAIN)
+	public String hello() {
+		return "count: " + counter.get();
+	}
 }

@@ -5,11 +5,10 @@
  */
 package org.acme.mapper;
 
-
-import org.mapstruct.InheritInverseConfiguration;
-import org.mapstruct.Mapper;
 import org.acme.model.Order;
 import org.acme.model.OrderDTO;
+import org.mapstruct.InheritInverseConfiguration;
+import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
 /**
@@ -18,10 +17,10 @@ import org.mapstruct.factory.Mappers;
 @Mapper
 public interface OrderMapper {
 
-    OrderMapper MAPPER = Mappers.getMapper(OrderMapper.class);
+	OrderMapper MAPPER = Mappers.getMapper(OrderMapper.class);
 
-    Order toOrder(OrderDTO orderDto);
+	Order toOrder(OrderDTO orderDto);
 
-    @InheritInverseConfiguration
-    OrderDTO fromOrder(Order order);
+	@InheritInverseConfiguration
+	OrderDTO fromOrder(Order order);
 }

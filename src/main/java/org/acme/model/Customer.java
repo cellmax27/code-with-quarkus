@@ -22,7 +22,7 @@ import jakarta.persistence.Entity;
  *         List<Movie> entities = Movie.listAll(); } }
  */
 @Entity
-public class Actor extends PanacheEntity {
+public class Customer extends PanacheEntity {
 	public String name;
 	public String profile_path;
 	public String character;

@@ -3,7 +3,7 @@ package org.acme.resources;
 import java.net.URI;
 import java.util.List;
 
-import org.acme.model.Actor;
+import org.acme.model.Salary;
 
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
@@ -17,40 +17,40 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
-@Path("/actors")
+@Path("/salarys")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class ActorResource {
+public class SalaryResource {
 
 	@GET
-	public List<Actor> list() {
-		return Actor.listAll();
+	public List<Salary> list() {
+		return Salary.listAll();
 	}
 
 	@GET
 	@Path("/{id}")
-	public Actor get(Long id) {
-		return Actor.findById(id);
+	public Salary get(Long id) {
+		return Salary.findById(id);
 	}
 
 	@POST
 	@Transactional
-	public Response create(Actor actor) {
-		actor.persist();
-		return Response.created(URI.create("/actors/" + actor.id)).build();
+	public Response create(Salary salary) {
+		salary.persist();
+		return Response.created(URI.create("/salarys/" + salary.id)).build();
 	}
 
 	@PUT
 	@Path("/{id}")
 	@Transactional
-	public Actor update(Long id, Actor actor) {
-		Actor entity = Actor.findById(id);
+	public Salary update(Long id, Salary salary) {
+		Salary entity = Salary.findById(id);
 		if (entity == null) {
 			throw new NotFoundException();
 		}
 
-		// map all fields from the actor parameter to the existing entity
-		entity.name = actor.name;
+		// map all fields from the salary parameter to the existing entity
+		entity.name = salary.name;
 
 		return entity;
 	}
@@ -59,7 +59,7 @@ public class ActorResource {
 	@Path("/{id}")
 	@Transactional
 	public void delete(Long id) {
-		Actor entity = Actor.findById(id);
+		Salary entity = Salary.findById(id);
 		if (entity == null) {
 			throw new NotFoundException();
 		}
@@ -69,13 +69,13 @@ public class ActorResource {
 	// TODO
 //    @GET
 //    @Path("/search/{name}")
-//    public Actor search(String name) {
-//        return Actor.findByName(name);
+//    public Salary search(String name) {
+//        return Salary.findByName(name);
 //    }
 
 	@GET
 	@Path("/count")
 	public Long count() {
-		return Actor.count();
+		return Salary.count();
 	}
 }

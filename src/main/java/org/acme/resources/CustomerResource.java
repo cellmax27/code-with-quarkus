@@ -3,7 +3,7 @@ package org.acme.resources;
 import java.net.URI;
 import java.util.List;
 
-import org.acme.model.Actor;
+import org.acme.model.Customer;
 
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
@@ -17,40 +17,40 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
-@Path("/actors")
+@Path("/customers")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class ActorResource {
+public class CustomerResource {
 
 	@GET
-	public List<Actor> list() {
-		return Actor.listAll();
+	public List<Customer> list() {
+		return Customer.listAll();
 	}
 
 	@GET
 	@Path("/{id}")
-	public Actor get(Long id) {
-		return Actor.findById(id);
+	public Customer get(Long id) {
+		return Customer.findById(id);
 	}
 
 	@POST
 	@Transactional
-	public Response create(Actor actor) {
-		actor.persist();
-		return Response.created(URI.create("/actors/" + actor.id)).build();
+	public Response create(Customer customer) {
+		customer.persist();
+		return Response.created(URI.create("/customers/" + customer.id)).build();
 	}
 
 	@PUT
 	@Path("/{id}")
 	@Transactional
-	public Actor update(Long id, Actor actor) {
-		Actor entity = Actor.findById(id);
+	public Customer update(Long id, Customer customer) {
+		Customer entity = Customer.findById(id);
 		if (entity == null) {
 			throw new NotFoundException();
 		}
 
-		// map all fields from the actor parameter to the existing entity
-		entity.name = actor.name;
+		// map all fields from the customer parameter to the existing entity
+		entity.name = customer.name;
 
 		return entity;
 	}
@@ -59,23 +59,22 @@ public class ActorResource {
 	@Path("/{id}")
 	@Transactional
 	public void delete(Long id) {
-		Actor entity = Actor.findById(id);
+		Customer entity = Customer.findById(id);
 		if (entity == null) {
 			throw new NotFoundException();
 		}
 		entity.delete();
 	}
 
-	// TODO
 //    @GET
 //    @Path("/search/{name}")
-//    public Actor search(String name) {
-//        return Actor.findByName(name);
+//    public Customer search(String name) {
+//        return Customer.findByName(name);
 //    }
 
 	@GET
 	@Path("/count")
 	public Long count() {
-		return Actor.count();
+		return Customer.count();
 	}
 }
