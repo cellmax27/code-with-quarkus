@@ -2,25 +2,19 @@ package org.acme.model;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.Entity;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-/**
- * Example JPA entity defined as a Panache Entity. An ID field of Long type is
- * provided, if you want to define your own ID field extends
- * <code>PanacheEntityBase</code> instead.
- *
- * This uses the active record pattern, you can also use the repository pattern
- * instead: .
- *
- * Usage (more example on the documentation)
- *
- * {@code
- *     public void doSomething() {
- *         Movie entity1 = new Movie();
- *         entity1.field = "field-1";
- *         entity1.persist();
- *
- *         List<Movie> entities = Movie.listAll(); } }
- */
+@Getter
+@Setter
+@NoArgsConstructor // Génère un constructeur sans arguments @AllArgsConstructor
+@AllArgsConstructor // Génère un constructeur avec tous les arguments public class Item
+@ToString
+@EqualsAndHashCode
 @Entity
 public class Actor extends PanacheEntity {
 	public String name;
