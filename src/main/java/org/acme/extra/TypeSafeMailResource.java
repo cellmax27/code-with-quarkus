@@ -1,5 +1,10 @@
 package org.acme.extra;
 
+import org.jboss.resteasy.reactive.RestQuery;
+
+import io.quarkus.mailer.MailTemplate;
+import io.quarkus.qute.CheckedTemplate;
+import io.smallrye.mutiny.Uni;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -8,12 +13,6 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-
-import org.jboss.resteasy.reactive.RestQuery;
-
-import io.quarkus.mailer.MailTemplate;
-import io.quarkus.qute.CheckedTemplate;
-import io.smallrye.mutiny.Uni;
 
 @Path("/type-safe")
 public class TypeSafeMailResource {
