@@ -318,7 +318,129 @@ INSERT INTO items (name, description) VALUES ('Item 2', 'Description de l\'Item 
 INSERT INTO items (name, description) VALUES ('Item 3', 'Description de l\'Item 3');
 
 
-
+INSERT INTO sakila2.actor
+(actor_id, first_name, last_name, `character`, last_update)
+VALUES(0, '', '', '', CURRENT_TIMESTAMP);
+INSERT INTO sakila2.actor_seq
+(next_val)
+VALUES(0);
+INSERT INTO sakila2.address
+(address_id, address, address2, district, city_id, postal_code, phone, location, last_update)
+VALUES(0, '', '', '', 0, '', '', ?, CURRENT_TIMESTAMP);
+INSERT INTO sakila2.appointement
+(status, canceledAt, customer_id, `end`, id, invoice_id, provider_id, `start`, work_id)
+VALUES(0, '', 0, '', 0, 0, 0, '', 0);
+INSERT INTO sakila2.appointement_seq
+(next_val)
+VALUES(0);
+INSERT INTO sakila2.category
+(category_id, name, last_update)
+VALUES(0, '', CURRENT_TIMESTAMP);
+INSERT INTO sakila2.city
+(city_id, city, country_id, last_update)
+VALUES(0, '', 0, CURRENT_TIMESTAMP);
+INSERT INTO sakila2.country
+(country_id, country, last_update)
+VALUES(0, '', CURRENT_TIMESTAMP);
+INSERT INTO sakila2.customer_seq
+(next_val)
+VALUES(0);
+INSERT INTO sakila2.dayplan
+(dayplan_id, first_name, last_name, `character`, last_update)
+VALUES(0, '', '', '', CURRENT_TIMESTAMP);
+INSERT INTO sakila2.dayplan_seq
+(next_val)
+VALUES(0);
+INSERT INTO sakila2.employee_seq
+(next_val)
+VALUES(0);
+INSERT INTO sakila2.film
+(film_id, title, description, release_year, language_id, original_language_id, rental_duration, rental_rate, `length`, replacement_cost, rating, special_features, last_update)
+VALUES(0, '', '', '', 0, 0, 3, 4.99, 0, 19.99, 'G', '', CURRENT_TIMESTAMP);
+INSERT INTO sakila2.film_actor
+(actor_id, film_id, last_update)
+VALUES(0, 0, CURRENT_TIMESTAMP);
+INSERT INTO sakila2.film_category
+(film_id, category_id, last_update)
+VALUES(0, 0, CURRENT_TIMESTAMP);
+INSERT INTO sakila2.film_text
+(film_id, title, description)
+VALUES(0, '', '');
+INSERT INTO sakila2.invoice
+(totalAmount, id, issuedDate, client, `number`, status)
+VALUES(0, 0, '', '', '', '');
+INSERT INTO sakila2.invoice_appointement
+(Invoice_id, appointments_id)
+VALUES(0, 0);
+INSERT INTO sakila2.invoice_seq
+(next_val)
+VALUES(0);
+INSERT INTO sakila2.item
+(id, description, name)
+VALUES(0, '', '');
+INSERT INTO sakila2.item_seq
+(next_val)
+VALUES(0);
+INSERT INTO sakila2.items
+(id, name, description)
+VALUES(0, '', '');
+INSERT INTO sakila2.`language`
+(language_id, name, last_update)
+VALUES(0, '', CURRENT_TIMESTAMP);
+INSERT INTO sakila2.movie
+(adult, birth, release_date, video, id, popularity, vote_average, vote_count, backdrop_path, name, original_language, original_title, overview, poster_path, title, genre_ids)
+VALUES(0, '', '', 0, 0, 0, 0, 0, '', '', '', '', '', '', '', ?);
+INSERT INTO sakila2.movie_seq
+(next_val)
+VALUES(0);
+INSERT INTO sakila2.myentity
+(id, field)
+VALUES(0, '');
+INSERT INTO sakila2.myentity_seq
+(next_val)
+VALUES(0);
+INSERT INTO sakila2.order_seq
+(next_val)
+VALUES(0);
+INSERT INTO sakila2.orderdto
+(quantity, id, petId, shipDate, name)
+VALUES(0, 0, 0, '', '');
+INSERT INTO sakila2.orderdto_seq
+(next_val)
+VALUES(0);
+INSERT INTO sakila2.provider_seq
+(next_val)
+VALUES(0);
+INSERT INTO sakila2.roles
+(id, name)
+VALUES(0, '');
+INSERT INTO sakila2.salary_seq
+(next_val)
+VALUES(0);
+INSERT INTO sakila2.test_user
+(id, password, `role`, username)
+VALUES(0, '', '', '');
+INSERT INTO sakila2.test_user_seq
+(next_val)
+VALUES(0);
+INSERT INTO sakila2.user_roles
+(user_id, role_id)
+VALUES(0, 0);
+INSERT INTO sakila2.users
+(id, username, password, enabled)
+VALUES(0, '', '', 0);
+INSERT INTO sakila2.`work`
+(duration, editable, price, id, description, name, targetCustomer)
+VALUES(0, 0, 0, 0, '', '', '');
+INSERT INTO sakila2.work_seq
+(next_val)
+VALUES(0);
+INSERT INTO sakila2.workplan
+(id, provider_id, friday, monday, saturday, sunday, thursday, tuesday, wednesday)
+VALUES(0, 0, ?, ?, ?, ?, ?, ?, ?);
+INSERT INTO sakila2.workplan_seq
+(next_val)
+VALUES(0);
 
 
 CREATE SEQUENCE CUSTOMER_SEQ START WITH 1 INCREMENT BY 1;

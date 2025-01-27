@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.Entity;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -20,6 +22,8 @@ import lombok.ToString;
 @Entity
 public class Movie extends PanacheEntity {
 	public String id;
+	
+	@NotBlank(message = "Title cannot be blank")
 	public String name;
 	public LocalDate birth;
 //    public Status status;
@@ -32,6 +36,8 @@ public class Movie extends PanacheEntity {
 	public String original_language; // : string;
 	public String original_title; // : string;
 	public String overview; // : string;
+	
+	@Min(message = "Author has been very lazy", value = 1)
 	public Long popularity; // : number;
 	public String poster_path; // : string;
 	public LocalDate release_date;// : string;
