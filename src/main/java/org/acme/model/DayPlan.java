@@ -16,9 +16,23 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode(callSuper=false)
 @Entity
-public class Customer extends PanacheEntity {
+public class DayPlan extends PanacheEntity {
 	public String name;
 	public String profile_path;
 	public String character;
 	public Long id;
+	
+	// put your custom logic here as instance methods
+
+	public DayPlan findByName(String name) {
+		return find("name", name).firstResult();
+	}
+
+//   public List<DayPlan> findAlive(){
+//       return list("status", Status.Alive);
+//   }
+
+	public void deleteStefs() {
+		delete("name", "Stef");
+	}
 }

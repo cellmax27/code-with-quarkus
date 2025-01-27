@@ -13,10 +13,10 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@NoArgsConstructor // Génère un constructeur sans arguments @AllArgsConstructor
-@AllArgsConstructor // Génère un constructeur avec tous les arguments public class Item
+@NoArgsConstructor 
+@AllArgsConstructor 
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper=false)
 @Entity
 public class Movie extends PanacheEntity {
 	public String id;

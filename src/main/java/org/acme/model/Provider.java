@@ -11,32 +11,19 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@NoArgsConstructor // Génère un constructeur sans arguments @AllArgsConstructor
-@AllArgsConstructor // Génère un constructeur avec tous les arguments public class Item
+@NoArgsConstructor 
+@AllArgsConstructor 
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper=false)
 @Entity
 public class Provider extends PanacheEntity {
 	public String name;
 	public String profile_path;
 	public String character;
 	public Long id;
-//	
-//    id:
-//        type: string
-//        description: Unique identifier for the provider
-//      name:
-//        type: string
-//        description: Name of the provider
-//      contactEmail:
-//        type: string
-//        description: Contact email of the provider
-//      phoneNumber:
-//        type: string
-//        description: Phone number of the provider
-//      address:
-//        type: string
-//        description: Address of the provider
+      public String contactEmail;
+      public String phoneNumber;
+    public String   address;
 	
 	// put your custom logic here as instance methods
 

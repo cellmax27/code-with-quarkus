@@ -6,6 +6,18 @@ insert into myentity (id, field) values(3, 'field-3');
 -- alter sequence myentity_seq restart with 4;
 
 
+-- sakila.dayplan definition
+
+CREATE TABLE `dayplan` (
+                         `dayplan_id` smallint unsigned NOT NULL AUTO_INCREMENT,
+                         `first_name` varchar(45) NOT NULL,
+                         `last_name` varchar(45) NOT NULL,
+                         `character` varchar(45) NOT NULL,
+                         `last_update` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                         PRIMARY KEY (`dayplan_id`),
+                         KEY `idx_dayplan_last_name` (`last_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=201 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 -- sakila.actor definition
 
 CREATE TABLE `actor` (
