@@ -1,0 +1,1891 @@
+openapi: 3.0.3
+info:
+  title: Swagger Petstore - OpenAPI 3.0
+  description: |-
+    This is a sample Pet Store Server based on the OpenAPI 3.0 specification.  You can find out more about
+    Swagger at [https://swagger.io](https://swagger.io). In the third iteration of the pet store, we've switched to the design first approach!
+    You can now help us improve the API whether it's by making changes to the definition itself or to the code.
+    That way, with time, we can improve the API in general, and expose some of the new features in OAS3.
+
+    _If you're looking for the Swagger 2.0/OAS 2.0 version of Petstore, then click [here](https://editor.swagger.io/?url=https://petstore.swagger.io/v2/swagger.yaml). Alternatively, you can load via the `Edit > Load Petstore OAS 2.0` menu option!_
+    
+    Some useful links:
+    - [The Pet Store repository](https://github.com/swagger-api/swagger-petstore)
+    - [The source API definition for the Pet Store](https://github.com/swagger-api/swagger-petstore/blob/master/src/main/resources/openapi.yaml)
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+  - url: https://petstore3.swagger.io/api/v3
+tags:
+  - name: product
+    description: Everything about your Products
+    externalDocs:
+      description: Find out more
+      url: http://swagger.io
+  - name: pet
+    description: Everything about your Pets
+    externalDocs:
+      description: Find out more
+      url: http://swagger.io
+  - name: movie
+    description: Everything about your Movies
+    externalDocs:
+      description: Find out more
+      url: http://swagger.io
+  - name: actor
+    description: Everything about your Actors
+    externalDocs:
+      description: Find out more
+      url: http://swagger.io
+  - name: store
+    description: Access to Petstore orders
+    externalDocs:
+      description: Find out more about our store
+      url: http://swagger.io
+  - name: user
+    description: Operations about user
+paths:
+  /upload:
+    post:
+      summary: Upload d'une image
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Image uploadée avec succès
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  url:
+                    type: string
+                    description: URL de l'image uploadée
+        '400':
+          description: Requête invalide
+        '500':
+          description: Erreur interne du serveur
+  /products:
+    get:
+      summary: Récupère la liste de tous les produits
+      description: Get all existing pets
+      operationId: getProducts
+      responses:
+        '200':
+          description: Liste des produits récupérée avec succès
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+    post:
+      summary: Crée un nouveau produit
+      description: create a pet
+      operationId: createProduct
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductInput'
+      responses:
+        '201':
+          description: Produit créé avec succès
+        '400':
+          description: Requête invalide
+  /products/{id}:
+    get:
+      summary: Récupère un produit par son ID
+      description: get a pet by ID 
+      operationId: getProductbyId
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: ID du produit à récupérer
+      responses:
+        '200':
+          description: Produit récupéré avec succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '404':
+          description: Produit non trouvé
+    put:
+      summary: Update un produit existant
+      description: update a pet
+      operationId: updateProduct
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: ID du produit à mettre à jour
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductInput'
+      responses:
+        '200':
+          description: Produit mis à jour avec succès
+        '400':
+          description: Requête invalide
+        '404':
+          description: Produit non trouvé
+    delete:
+      summary: Delete un produit par son ID
+      description: delete a product
+      operationId: deleteProduct
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: ID du produit à supprimer
+      responses:
+        '204':
+          description: Produit supprimé avec succès
+        '404':
+          description: Produit non trouvé
+  /pet:
+    get:
+      tags:
+        - pet
+      summary: Get all existing pets
+      description: Get all existing pets
+      operationId: getPets
+      requestBody:
+        description: Get all existin pets in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pet'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Pet'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Pet'
+      responses:
+        200:
+          description: New response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+      security:
+        - petstore_auth:
+            - write:pets
+            - read:pets
+    put:
+      tags:
+        - pet
+      summary: Update an existing pet
+      description: Update an existing pet by Id
+      operationId: updatePet
+      requestBody:
+        description: Update an existent pet in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pet'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Pet'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Pet'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Pet'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Pet not found
+        '422':
+          description: Validation exception
+      security:
+        - petstore_auth:
+            - write:pets
+            - read:pets
+    post:
+      tags:
+        - pet
+      summary: Add a new pet to the store
+      description: Add a new pet to the store
+      operationId: addPet
+      requestBody:
+        description: Create a new pet in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pet'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Pet'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Pet'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Pet'
+        '400':
+          description: Invalid input
+        '422':
+          description: Validation exception
+      security:
+        - petstore_auth:
+            - write:pets
+            - read:pets
+  /pet/findByStatus:
+    get:
+      tags:
+        - pet
+      summary: Finds Pets by status
+      description: Multiple status values can be provided with comma separated strings
+      operationId: findPetsByStatus
+      parameters:
+        - name: status
+          in: query
+          description: Status values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: available
+            enum:
+              - available
+              - pending
+              - sold
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pet'          
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pet'
+        '400':
+          description: Invalid status value
+      security:
+        - petstore_auth:
+            - write:pets
+            - read:pets
+  /pet/findByTags:
+    get:
+      tags:
+        - pet
+      summary: Finds Pets by tags
+      description: Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.
+      operationId: findPetsByTags
+      parameters:
+        - name: tags
+          in: query
+          description: Tags to filter by
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pet'          
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pet'
+        '400':
+          description: Invalid tag value
+      security:
+        - petstore_auth:
+            - write:pets
+            - read:pets
+  /pet/{petId}:
+    get:
+      tags:
+        - pet
+      summary: Find pet by ID
+      description: Returns a single pet
+      operationId: getPetById
+      parameters:
+        - name: petId
+          in: path
+          description: ID of pet to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Pet'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Pet not found
+      security:
+        - api_key: []
+        - petstore_auth:
+            - write:pets
+            - read:pets
+    post:
+      tags:
+        - pet
+      summary: Updates a pet in the store with form data
+      description: ''
+      operationId: updatePetWithForm
+      parameters:
+        - name: petId
+          in: path
+          description: ID of pet that needs to be updated
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: name
+          in: query
+          description: Name of pet that needs to be updated
+          schema:
+            type: string
+        - name: status
+          in: query
+          description: Status of pet that needs to be updated
+          schema:
+            type: string
+      responses:
+        '400':
+          description: Invalid input
+      security:
+        - petstore_auth:
+            - write:pets
+            - read:pets
+    delete:
+      tags:
+        - pet
+      summary: Deletes a pet
+      description: delete a pet
+      operationId: deletePet
+      parameters:
+        - name: api_key
+          in: header
+          description: ''
+          required: false
+          schema:
+            type: string
+        - name: petId
+          in: path
+          description: Pet id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '400':
+          description: Invalid pet value
+      security:
+        - petstore_auth:
+            - write:pets
+            - read:pets
+  /pet/{petId}/uploadImage:
+    post:
+      tags:
+        - pet
+      summary: uploads an image
+      description: ''
+      operationId: uploadFile
+      parameters:
+        - name: petId
+          in: path
+          description: ID of pet to update
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: additionalMetadata
+          in: query
+          description: Additional Metadata
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelApiResponse'
+      security:
+        - petstore_auth:
+            - write:pets
+            - read:pets
+  /movie:
+    get:
+      tags:
+        - movie
+      summary: Get all existing movies
+      description: Get all existing movies
+      operationId: getMovies
+      requestBody:
+        description: Get all existins movies in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Movie'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Movie'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Movie'
+      responses:
+        200:
+          description: New response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Movie'
+      security:
+        - moviestore_auth:
+            - write:movies
+            - read:movies
+    put:
+      tags:
+        - pet
+      summary: Update an existing movie
+      description: Update an existing movie by Id
+      operationId: updateMovie
+      requestBody:
+        description: Update an existent movie in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Movie'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Movie'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Movie'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Movie'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Movie'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Movie not found
+        '422':
+          description: Validation exception
+      security:
+        - moviestore_auth:
+            - write:movies
+            - read:movies
+    post:
+      tags:
+        - movie
+      summary: Add a new movie to the store
+      description: Add a new movie to the store
+      operationId: addMovie
+      requestBody:
+        description: Create a new movie in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Movie'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Movie'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Movie'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Movie'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Movie'
+        '400':
+          description: Invalid input
+        '422':
+          description: Validation exception
+      security:
+        - moviestore_auth:
+            - write:movies
+            - read:movies
+  /movie/findByStatus:
+    get:
+      tags:
+        - movie
+      summary: Finds Movies by status
+      description: Multiple status values can be provided with comma separated strings
+      operationId: findMoviesByStatus
+      parameters:
+        - name: status
+          in: query
+          description: Status values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: available
+            enum:
+              - available
+              - pending
+              - sold
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Movie'          
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Movie'
+        '400':
+          description: Invalid status value
+      security:
+        - moviestore_auth:
+            - write:movies
+            - read:movies
+  /movie/findByTags:
+    get:
+      tags:
+        - movie
+      summary: Finds Movies by tags
+      description: Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.
+      operationId: findMoviesByTags
+      parameters:
+        - name: tags
+          in: query
+          description: Tags to filter by
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Movie'          
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Movie'
+        '400':
+          description: Invalid tag value
+      security:
+        - moviestore_auth:
+            - write:movies
+            - read:movies
+  /movie/{movieId}:
+    get:
+      tags:
+        - movie
+      summary: Find movie by ID
+      description: Returns a single movie
+      operationId: getMovieById
+      parameters:
+        - name: movieId
+          in: path
+          description: ID of movie to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Movie'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Movie'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Movie not found
+      security:
+        - api_key: []
+        - moviestore_auth:
+            - write:movies
+            - read:movies
+    post:
+      tags:
+        - movie
+      summary: Updates a movie in the store with form data
+      description: ''
+      operationId: updateMovieWithForm
+      parameters:
+        - name: movieId
+          in: path
+          description: ID of movie that needs to be updated
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: name
+          in: query
+          description: Name of movie that needs to be updated
+          schema:
+            type: string
+        - name: status
+          in: query
+          description: Status of movie that needs to be updated
+          schema:
+            type: string
+      responses:
+        '400':
+          description: Invalid input
+      security:
+        - moviestore_auth:
+            - write:movies
+            - read:movies
+    delete:
+      tags:
+        - movie
+      summary: Deletes a movie
+      description: delete a movie
+      operationId: deleteMovie
+      parameters:
+        - name: api_key
+          in: header
+          description: ''
+          required: false
+          schema:
+            type: string
+        - name: movieId
+          in: path
+          description: Movie id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '400':
+          description: Invalid movie value
+      security:
+        - moviestore_auth:
+            - write:movies
+            - read:movies
+  /movie/{movieId}/uploadImage:
+    post:
+      tags:
+        - movie
+      summary: uploads an image
+      description: ''
+      operationId: uploadMovieFile
+      parameters:
+        - name: movieId
+          in: path
+          description: ID of movie to update
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: additionalMetadata
+          in: query
+          description: Additional Metadata
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelApiResponse'
+      security:
+        - moviestore_auth:
+            - write:movies
+            - read:movies
+
+  /actor:
+    get:
+      tags:
+        - actor
+      summary: Get all existing actors
+      description: Get all existing actors
+      operationId: getActors
+      requestBody:
+        description: Get all existin actors in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Actor'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Actor'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Actor'
+      responses:
+        200:
+          description: New response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Actor'
+      security:
+        - actorstore_auth:
+            - write:actors
+            - read:actors
+    put:
+      tags:
+        - actor
+      summary: Update an existing actor
+      description: Update an existing actor by Id
+      operationId: updateActor
+      requestBody:
+        description: Update an existent actor in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Actor'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Actor'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Actor'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Actor'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Actor'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Actor not found
+        '422':
+          description: Validation exception
+      security:
+        - actorstore_auth:
+            - write:actors
+            - read:actors
+    post:
+      tags:
+        - actor
+      summary: Add a new actor to the store
+      description: Add a new actor to the store
+      operationId: addActor
+      requestBody:
+        description: Create a new actor in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Actor'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Actor'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Actor'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Actor'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Actor'
+        '400':
+          description: Invalid input
+        '422':
+          description: Validation exception
+      security:
+        - actorstore_auth:
+            - write:actors
+            - read:actors
+  /actor/findByStatus:
+    get:
+      tags:
+        - actor
+      summary: Finds Actors by status
+      description: Multiple status values can be provided with comma separated strings
+      operationId: findActorsByStatus
+      parameters:
+        - name: status
+          in: query
+          description: Status values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: available
+            enum:
+              - available
+              - pending
+              - sold
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Actor'          
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Actor'
+        '400':
+          description: Invalid status value
+      security:
+        - actorstore_auth:
+            - write:actors
+            - read:actors
+  /actor/findByTags:
+    get:
+      tags:
+        - actor
+      summary: Finds Actors by tags
+      description: Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.
+      operationId: findActorsByTags
+      parameters:
+        - name: tags
+          in: query
+          description: Tags to filter by
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Actor'          
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Actor'
+        '400':
+          description: Invalid tag value
+      security:
+        - actorstore_auth:
+            - write:actors
+            - read:actors
+  /actor/{actorId}:
+    get:
+      tags:
+        - actor
+      summary: Find actor by ID
+      description: Returns a single actor
+      operationId: getActorById
+      parameters:
+        - name: actorId
+          in: path
+          description: ID of actor to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Actor'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Actor'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Actor not found
+      security:
+        - api_key: []
+        - actorstore_auth:
+            - write:actors
+            - read:actors
+    post:
+      tags:
+        - actor
+      summary: Updates a actor in the store with form data
+      description: ''
+      operationId: updateActorWithForm
+      parameters:
+        - name: actorId
+          in: path
+          description: ID of actor that needs to be updated
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: name
+          in: query
+          description: Name of actor that needs to be updated
+          schema:
+            type: string
+        - name: status
+          in: query
+          description: Status of actor that needs to be updated
+          schema:
+            type: string
+      responses:
+        '400':
+          description: Invalid input
+      security:
+        - actorstore_auth:
+            - write:actors
+            - read:actors
+    delete:
+      tags:
+        - actor
+      summary: Deletes a actor
+      description: delete a actor
+      operationId: deleteActor
+      parameters:
+        - name: api_key
+          in: header
+          description: ''
+          required: false
+          schema:
+            type: string
+        - name: actorId
+          in: path
+          description: Actor id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '400':
+          description: Invalid actor value
+      security:
+        - actorstore_auth:
+            - write:actors
+            - read:actors
+  /actor/{actorId}/uploadImage:
+    post:
+      tags:
+        - actor
+      summary: uploads an image
+      description: ''
+      operationId: uploadActorFile
+      parameters:
+        - name: actorId
+          in: path
+          description: ID of actor to update
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: additionalMetadata
+          in: query
+          description: Additional Metadata
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelApiResponse'
+      security:
+        - actorstore_auth:
+            - write:actors
+            - read:actors
+
+  /store/inventory:
+    get:
+      tags:
+        - store
+      summary: Returns pet inventories by status
+      description: Returns a map of status codes to quantities
+      operationId: getInventory
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: integer
+                  format: int32
+      security:
+        - api_key: []
+  /store/order:
+    post:
+      tags:
+        - store
+      summary: Place an order for a pet
+      description: Place a new order in the store
+      operationId: placeOrder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Order'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '400':
+          description: Invalid input
+        '422':
+          description: Validation exception
+  /store/order/{orderId}:
+    get:
+      tags:
+        - store
+      summary: Find purchase order by ID
+      description: For valid response try integer IDs with value <= 5 or > 10. Other values will generate exceptions.
+      operationId: getOrderById
+      parameters:
+        - name: orderId
+          in: path
+          description: ID of order that needs to be fetched
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Order not found
+    delete:
+      tags:
+        - store
+      summary: Delete purchase order by ID
+      description: For valid response try integer IDs with value < 1000. Anything above 1000 or nonintegers will generate API errors
+      operationId: deleteOrder
+      parameters:
+        - name: orderId
+          in: path
+          description: ID of the order that needs to be deleted
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Order not found
+  /user:
+    post:
+      tags:
+        - user
+      summary: Create user
+      description: This can only be done by the logged in user.
+      operationId: createUser
+      requestBody:
+        description: Created user object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        default:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User'
+  /user/createWithList:
+    post:
+      tags:
+        - user
+      summary: Creates list of users with given input array
+      description: Creates list of users with given input array
+      operationId: createUsersWithListInput
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User'
+        default:
+          description: successful operation
+  /user/login:
+    get:
+      tags:
+        - user
+      summary: Logs user into the system
+      description: ''
+      operationId: loginUser
+      parameters:
+        - name: username
+          in: query
+          description: The user name for login
+          required: false
+          schema:
+            type: string
+        - name: password
+          in: query
+          description: The password for login in clear text
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          headers:
+            X-Rate-Limit:
+              description: calls per hour allowed by the user
+              schema:
+                type: integer
+                format: int32
+            X-Expires-After:
+              description: date in UTC when token expires
+              schema:
+                type: string
+                format: date-time
+          content:
+            application/xml:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+        '400':
+          description: Invalid username/password supplied
+  /user/logout:
+    get:
+      tags:
+        - user
+      summary: Logs out current logged in user session
+      description: ''
+      operationId: logoutUser
+      parameters: []
+      responses:
+        default:
+          description: successful operation
+  /user/{username}:
+    get:
+      tags:
+        - user
+      summary: Get user by user name
+      description: ''
+      operationId: getUserByName
+      parameters:
+        - name: username
+          in: path
+          description: 'The name that needs to be fetched. Use user1 for testing. '
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Invalid username supplied
+        '404':
+          description: User not found
+    put:
+      tags:
+        - user
+      summary: Update user
+      description: This can only be done by the logged in user.
+      operationId: updateUser
+      parameters:
+        - name: username
+          in: path
+          description: name that need to be deleted
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Update an existent user in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        default:
+          description: successful operation
+    delete:
+      tags:
+        - user
+      summary: Delete user
+      description: This can only be done by the logged in user.
+      operationId: deleteUser
+      parameters:
+        - name: username
+          in: path
+          description: The name that needs to be deleted
+          required: true
+          schema:
+            type: string
+      responses:
+        '400':
+          description: Invalid username supplied
+        '404':
+          description: User not found
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID unique du produit
+        name:
+          type: string
+          description: Nom du produit
+        description:
+          type: string
+          description: Description du produit
+        price:
+          type: number
+          format: float
+          description: Prix du produit
+        category:
+          $ref: '#/components/schemas/Category'
+      required:
+        - id
+        - name
+        - price
+    ProductInput:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Nom du produit
+        description:
+          type: string
+          description: Description du produit
+        price:
+          type: number
+          format: float
+          description: Prix du produit
+      required:
+        - name
+        - price
+    Book:
+      allOf:
+        - $ref: '#/components/schemas/Product'
+        - type: object
+          properties:
+            author:
+              type: string
+            isbn:
+              type: string
+    Clothing:
+      allOf:
+        - $ref: '#/components/schemas/Product'
+        - type: object
+          properties:
+            size:
+              type: string
+            color:
+              type: string
+    Order:
+      type: object
+      x-class-extra-annotation: "@jakarta.persistence.Entity"
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        petId:
+          type: integer
+          format: int64
+          example: 198772
+        quantity:
+          type: integer
+          format: int32
+          example: 7
+        shipDate:
+          type: string
+          format: date-time
+        status:
+          type: string
+          description: Order Status
+          example: approved
+          enum:
+            - placed
+            - approved
+            - delivered
+        complete:
+          type: boolean
+      xml:
+        name: order
+
+    OrderDTO:
+      type: object
+      x-class-extra-annotation: "@jakarta.persistence.Entity"
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        petId:
+          type: integer
+          format: int64
+          example: 198772
+        quantity:
+          type: integer
+          format: int32
+          example: 7
+        shipDate:
+          type: string
+          format: date-time
+        status:
+          type: string
+          description: Order Status
+          example: approved
+          enum:
+            - placed
+            - approved
+            - delivered
+        complete:
+          type: boolean
+      xml:
+        name: order
+
+    Customer:
+      type: object
+      x-class-extra-annotation: "@jakarta.persistence.Entity"
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 100000
+        username:
+          type: string
+          example: fehguy
+        address:
+          type: array
+          xml:
+            name: addresses
+            wrapped: true
+          items:
+            $ref: '#/components/schemas/Address'
+      xml:
+        name: customer
+
+    CustomerDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 100000
+        username:
+          type: string
+          example: fehguy
+        address:
+          type: array
+          xml:
+            name: addresses
+            wrapped: true
+          items:
+            $ref: '#/components/schemas/Address'
+      xml:
+        name: customer
+
+    Salary:
+      type: object
+      x-class-extra-annotation: "@jakarta.persistence.Entity"
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 100000
+        username:
+          type: string
+          example: fehguy
+        address:
+          type: array
+          xml:
+            name: addresses
+            wrapped: true
+          items:
+            $ref: '#/components/schemas/Address'
+      xml:
+        name: salary
+
+    SalaryDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 100000
+        username:
+          type: string
+          example: fehguy
+        address:
+          type: array
+          xml:
+            name: addresses
+            wrapped: true
+          items:
+            $ref: '#/components/schemas/Address'
+      xml:
+        name: salary
+
+    Address:
+      type: object
+      properties:
+        street:
+          type: string
+          example: 437 Lytton
+        city:
+          type: string
+          example: Palo Alto
+        state:
+          type: string
+          example: CA
+        zip:
+          type: string
+          example: '94301'
+      xml:
+        name: address
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        name:
+          type: string
+          example: Dogs
+      xml:
+        name: category
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        username:
+          type: string
+          example: theUser
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: James
+        email:
+          type: string
+          example: john@email.com
+        password:
+          type: string
+          example: '12345'
+        phone:
+          type: string
+          example: '12345'
+        userStatus:
+          type: integer
+          description: User Status
+          format: int32
+          example: 1
+      xml:
+        name: user
+    Tag:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+      xml:
+        name: tag
+# heritage
+    Pet:
+      required:
+        - name
+        - photoUrls
+      type: object
+      x-class-extra-annotation: "@jakarta.persistence.Entity"
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        name:
+          type: string
+          example: doggie
+        category:
+          $ref: '#/components/schemas/Category'
+        photoUrls:
+          type: array
+          xml:
+            wrapped: true
+          items:
+            type: string
+            xml:
+              name: photoUrl
+        tags:
+          type: array
+          xml:
+            wrapped: true
+          items:
+            $ref: '#/components/schemas/Tag'
+        status:
+          type: string
+          description: pet status in the store
+          enum:
+            - available
+            - pending
+            - sold
+      oneOf:
+        - $ref: '#/components/schemas/Cat'
+        - $ref: '#/components/schemas/Dog'
+    Cat:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/Pet'
+        - type: object
+          properties:
+            huntingSkill:
+              $ref: '#/components/schemas/HuntingSkill'
+    Dog:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/Pet'
+        - type: object
+          properties:
+            packSize:
+              type: integer
+    Status:
+      type: string
+      enum: [available, pending, sold]
+    HuntingSkill:
+      type: string
+      enum: [clueless, lazy, adventurous, aggressive]
+    Movie:
+      required:
+        - name
+        - photoUrls
+      type: object
+      x-class-extra-annotation: "@jakarta.persistence.Entity"
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        name:
+          type: string
+          example: doggie
+        original_title:
+          type: string
+          example: doggie
+        overview:
+          type: string
+          example: doggie
+        director:
+            type: string
+            example: doggie
+        duration:
+          type: integer
+          format: int64
+          example: 10
+        popularity:
+          type: integer
+          format: int64
+          example: 10
+        poster_path:
+          type: string
+          example: doggie
+        release_date: 
+          type: string
+          example: doggie;
+        category:
+          $ref: '#/components/schemas/Category'
+        photoUrls:
+          type: array
+          xml:
+            wrapped: true
+          items:
+            type: string
+            xml:
+              name: photoUrl
+        tags:
+          type: array
+          xml:
+            wrapped: true
+          items:
+            $ref: '#/components/schemas/Tag'
+        status:
+          type: string
+          description: movie status in the store
+          enum:
+            - available
+            - pending
+            - sold
+      xml:
+        name: movie
+    Actor:
+      required:
+        - name
+        - photoUrls
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        name:
+          type: string
+          example: doggie
+        character:
+         type: string
+         example: Jean Dujardin
+        category:
+          $ref: '#/components/schemas/Category'
+        photoUrls:
+          type: array
+          xml:
+            wrapped: true
+          items:
+            type: string
+            xml:
+              name: photoUrl
+        tags:
+          type: array
+          xml:
+            wrapped: true
+          items:
+            $ref: '#/components/schemas/Tag'
+        status:
+          type: string
+          description: actor status in the store
+          enum:
+            - available
+            - pending
+            - sold
+    ModelApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        type:
+          type: string
+        message:
+          type: string
+      xml:
+        name: '##default'
+  requestBodies:
+    Pet:
+      description: Pet object that needs to be added to the store
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Pet'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/Pet'
+    UserArray:
+      description: List of user object
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/User'
+  securitySchemes:
+    petstore_auth:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://petstore3.swagger.io/oauth/authorize
+          scopes:
+            write:pets: modify pets in your account
+            read:pets: read your pets
+    moviestore_auth:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://petstore3.swagger.io/oauth/authorize
+          scopes:
+            write:movies: modify movies in your account
+            read:movies: read your movies
+    actorstore_auth:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://actorstore3.swagger.io/oauth/authorize
+          scopes:
+            write:actors: modify actors in your account
+            read:actors: read your actors
+    api_key:
+      type: apiKey
+      name: api_key
+      in: header
