@@ -506,8 +506,8 @@ INSERT INTO sakila2.workplan_seq
 (next_val)
 VALUES(0);
 
-INSERT INTO Greeting(id, name)
-VALUES (nextval('Greeting_SEQ'), 'Alice');
-INSERT INTO Greeting(id, name)
-VALUES (nextval('Greeting_SEQ'), 'Bob');
+--INSERT INTO Greeting(id, name)
+--VALUES (nextval('Greeting_SEQ'), 'Alice');
+--INSERT INTO Greeting(id, name)
+--VALUES (nextval('Greeting_SEQ'), 'Bob');
 
