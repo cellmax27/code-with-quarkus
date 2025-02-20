@@ -16,12 +16,16 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.Set;
 
 @Path("/api/v1/appointements")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class AppointementResource {
-
+    private Set<Appointement> appointements = Collections.newSetFromMap(Collections.synchronizedMap(new LinkedHashMap<>()));
+    
 	@GET
 	public List<Appointement> list() {
 		return Appointement.listAll();
@@ -35,9 +39,9 @@ public class AppointementResource {
 
 	@POST
 	@Transactional
-	public Response create(Appointement customer) {
-		customer.persist();
-		return Response.created(URI.create("/appointements/" + customer.id)).build();
+	public Response create(Appointement appointement) {
+		appointement.persist();
+		return Response.created(URI.create("/appointements/" + appointement.id)).build();
 	}
 
 	@PUT
@@ -60,11 +64,13 @@ public class AppointementResource {
 	@Path("/{id}")
 	@Transactional
 	public void delete(Long id) {
-		Appointement entity = Appointement.findById(id);
-		if (entity == null) {
+		Appointement appointement = Appointement.findById(id);
+		if (appointement == null) {
 			throw new NotFoundException();
 		}
-		entity.delete();
+		appointement.delete();
+		
+
 	}
 
 //    @GET
