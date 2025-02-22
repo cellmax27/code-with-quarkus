@@ -11,12 +11,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter
-@Setter
-@NoArgsConstructor 
-@AllArgsConstructor 
-@ToString
-@EqualsAndHashCode(callSuper=false)
+//@Getter
+//@Setter
+//@NoArgsConstructor 
+//@AllArgsConstructor 
+//@ToString
+//@EqualsAndHashCode(callSuper=false)
 @Entity
 public class Order extends PanacheEntity {
 	public Long id;
